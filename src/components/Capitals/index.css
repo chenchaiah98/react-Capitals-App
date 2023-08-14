@@ -1,0 +1,24 @@
+/* Write your CSS here */
+.app-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: #93c5fd;
+}
+.Capitals-container {
+  min-height: 300px;
+  min-width: 500px;
+  background: #ffff;
+  padding: 40px;
+  border-radius: 40px;
+}
+.dropdown-container {
+  display: flex;
+}
+.dropdown {
+  width: 150px;
+  padding: 0px 10px;
+  margin-right: 10px;
+}
