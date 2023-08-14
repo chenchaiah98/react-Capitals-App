@@ -30,44 +30,52 @@ const countryAndCapitalsList = [
   },
 ]
 
-// Write your code here
-
 class Capitals extends Component {
   state = {
-    countryText: 'India',
+    activeCapitalId: countryAndCapitalsList[0].id,
   }
 
-  selectItem = e => {
-    const country = e.target.value
-    const CountryDisplay = countryAndCapitalsList.find(
-      each => each.id === country,
+  onChangeCapital = event => {
+    this.setState({activeCapitalId: event.target.value})
+  }
+
+  getCountry = () => {
+    const {activeCapitalId} = this.state
+
+    const activeCountryAndCapital = countryAndCapitalsList.find(
+      eachCapital => eachCapital.id === activeCapitalId,
     )
-    this.setState({countryText: CountryDisplay.country})
+
+    return activeCountryAndCapital.country
   }
 
   render() {
-    const {countryText} = this.state
+    const {activeCapitalId} = this.state
+    const country = this.getCountry(activeCapitalId)
+
     return (
       <div className="app-container">
-        <div className="Capitals-container">
-          <h1>Countries And Capitals</h1>
-          <div className="dropdown-container">
+        <div className="capitals-container">
+          <h1 className="heading">Countries And Capitals</h1>
+          <div className="question-container">
             <select
-              name="country"
-              id="country"
-              onChange={this.selectItem}
-              className="dropdown"
+              className="capital-select"
+              onChange={this.onChangeCapital}
+              value={activeCapitalId}
             >
-              {countryAndCapitalsList.map(eachCountry => (
-                <option value={eachCountry.id} key={eachCountry.id}>
-                  {eachCountry.capitalDisplayText}
+              {countryAndCapitalsList.map(eachCapital => (
+                <option
+                  key={eachCapital.id}
+                  value={eachCapital.id}
+                  className="option"
+                >
+                  {eachCapital.capitalDisplayText}
                 </option>
               ))}
             </select>
-            <p>is capital of which country</p>
+            <p className="question">is capital of which country?</p>
           </div>
-
-          <p>{countryText}</p>
+          <p className="country">{country}</p>
         </div>
       </div>
     )
